@@ -2,7 +2,7 @@
 
 BASE=$(cd `dirname "${BASH_SOURCE[0]}"` && pwd)
 
-SEQ=${BASE}/query/query.fasta
+SEQ=${BASE}/query/query.fasta.gz
 TREE=${BASE}/ref/Bact_Constr_Backbone.newick
 REF=${BASE}/query/reference.fasta
 MOD=${BASE}/ref/RAxML_info.infofile
