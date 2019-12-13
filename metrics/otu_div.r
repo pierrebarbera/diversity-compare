@@ -1,4 +1,6 @@
 #!/usr/bin/env Rscript
+args = commandArgs(trailingOnly=TRUE)
+if ( length(args) != 1 ) {stop("usage: otu_div.r <dataset>")}
 
 library(readr)
 #source('http://bioconductor.org/biocLite.R')
@@ -11,8 +13,10 @@ script.name <- sub(file.arg.name, "", initial.options[grep(file.arg.name, initia
 script.dir <- dirname(script.name)
 base.dir <- normalizePath( file.path( script.dir, ".." ) )
 
-ds <- "bv"
-# ds <- "hmp2"
+ds <- args[1]
+
+data.dir <- normalizePath( file.path( base.dir, "datasets", ds ) )
+if ( !dir.exists(data.dir) ) {stop("No such dataset")}
 
 # read and prepare the otu table
 p <-read_delim(file.path( base.dir, "datasets", ds, "otu", "otu.table"),"\t")

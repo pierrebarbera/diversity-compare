@@ -21,6 +21,7 @@ THREADS=40
 
 OUT=${BASE}/${DS}/otu
 mkdir -p ${OUT}
+mkdir -p ${FILT_SAMPLES}
 
 set -e
 

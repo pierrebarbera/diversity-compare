@@ -1,22 +1,24 @@
 #!/bin/bash
-
 BASE=$(cd `dirname "${BASH_SOURCE[0]}"`/.. && pwd)
 
-## BV data
-# DATA=${BASE}/datasets/bv
-# WORKDIR=${BASE}/workdir/scrapp
+die () {
+    echo >&2 "$@"
+    exit 1
+}
 
-# JPDIR=${DATA}/03_place/rare
-# SEQDIR=${DATA}/03_place/queries
+[ "$#" -eq 1 ] || die "specify dataset!"
 
-## HMP2 data
-DATA=${BASE}/datasets/hmp2
-WORKDIR=${BASE}/workdir/hmp2/scrapp_boot_1000
+DS=$1
+DATA=${BASE}/datasets/${DS}
 
-mkdir -p ${WORKDIR}
+[ ! -d "${DATA}" ] && die "No such dataset."
+
+WORKDIR=${BASE}/workdir/${DS}/scrapp_boot_1000
 
 JPDIR=${DATA}/place/samples
 SEQDIR=${JPDIR}
+
+mkdir -p ${WORKDIR}
 
 # set -e
 shopt -s nullglob
@@ -29,7 +31,7 @@ for jplace in ${JPDIR}/*.jplace; do
   name=${name%.*}
 
   OUT=${WORKDIR}/${name}
-  QRY=${SEQDIR}/${name}.fasta
+  QRY=${SEQDIR}/${name}.fasta.gz
 
   ((i=i%N)); ((i++==0)) && wait
   ~/scrapp/scrapp.py --cluster-above 1000 --bootstrap --jplace ${jplace} --alignment ${QRY} --work-dir ${OUT} --parallel threads --num-threads 4 --min-weight 0.5 &

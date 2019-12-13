@@ -2,13 +2,21 @@
 
 BASE=$(cd `dirname "${BASH_SOURCE[0]}"`/.. && pwd)
 
-DS=hmp2
-#DS=bv
+die () {
+    echo >&2 "$@"
+    exit 1
+}
 
+[ "$#" -eq 1 ] || die "specify dataset!"
+
+DS=$1
 DATA=${BASE}/datasets/${DS}
+
+[ ! -d "${DATA}" ] && die "No such dataset."
+
+
 WORKDIR=${BASE}/workdir/${DS}/guppy-fpd
 
-#JPDIR=${DATA}/03_place/rare
 JPDIR=${DATA}/place/samples
 
 set -e
