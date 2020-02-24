@@ -1,5 +1,7 @@
 #!/bin/bash
 
+THREADS=4
+
 die () {
     echo >&2 "$@"
     exit 1
@@ -10,16 +12,15 @@ BASE=$(cd `dirname "${BASH_SOURCE[0]}"` && pwd)
 [ "$#" -eq 1 ] || die "specify dataset!"
 
 DS=$1
-DATA=${BASE}/${DS}/data
+DSBASE=${BASE}/${DS}
+DATA=${DSBASE}/data
 
 [ ! -d "${DATA}" ] && die "No such dataset."
 
-SAMPLES=${DATA}/queries_clean
+SAMPLES=${DATA}/samples
 FILT_SAMPLES=${SAMPLES}/filtered
 
-THREADS=40
-
-OUT=${BASE}/${DS}/otu
+OUT=${DSBASE}/otu
 mkdir -p ${OUT}
 mkdir -p ${FILT_SAMPLES}
 
