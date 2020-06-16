@@ -26,4 +26,4 @@ cd ${WORKDIR}
 
 # export OMP_NUM_THREADS=10
 
-scrapp-diversity ${SF} > result.csv
+${BASE}/bin/scrapp-diversity ${SF} > result.csv

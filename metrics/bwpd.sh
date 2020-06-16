@@ -24,4 +24,4 @@ shopt -s nullglob
 mkdir -p ${WORKDIR}
 cd ${WORKDIR}
 
-jplace-diversity ${JPDIR}/*.jplace > result.csv
+${BASE}/bin/jplace-diversity ${JPDIR}/*.jplace > result.csv
