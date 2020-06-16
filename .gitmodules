@@ -1,0 +1,3 @@
+[submodule "programs/genesis"]
+	path = programs/genesis
+	url = git@github.com:lczech/genesis.git
